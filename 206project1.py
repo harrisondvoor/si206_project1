@@ -1,5 +1,6 @@
 import os
 import filecmp
+import datetime
 
 #1
 def getData(file):
@@ -46,7 +47,8 @@ def classSizes(data):
 # [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
 
 	#Your code here:
-	size_of_grade = {'Senior':0, 'Junior':0, 'Sophomore':0, 'Freshmen':0}
+	lst3 = []
+	size_of_grade = {'Senior':0, 'Junior':0, 'Sophomore':0, 'Freshman':0}
 	for y in data:
 		if y['Class'] == 'Senior':
 			size_of_grade['Senior'] +=1
@@ -54,13 +56,14 @@ def classSizes(data):
 			size_of_grade['Junior'] += 1
 		elif y['Class'] == 'Sophomore':
 			size_of_grade['Sophomore'] += 1
-		elif y['Class'] == 'Freshmen':
-			size_of_grade['Freshmen'] += 1
-		lst_srtd_classes = sorted(size_of_grade, key = lambda z: size_of_grade[z], reverse = True)
-		tot = []
-		for b in lst_srtd_classes:
-			tot.append((b, size_of_grade[a]))
-			return tot
+		elif y['Class'] == 'Freshman':
+			size_of_grade['Freshman'] += 1
+	lst3.append(('Senior', size_of_grade['Senior']))
+	lst3.append(('Junior', size_of_grade['Junior']))
+	lst3.append(('Sophomore', size_of_grade['Sophomore']))
+	lst3.append(('Freshman', size_of_grade['Freshman']))
+
+	return sorted(lst3, key = lambda z: z[1], reverse = True)
 
 
 
@@ -75,13 +78,12 @@ def findDay(a):
 	#Your code here:
 	dict_of_days = {}
 	for x in a:
-		date = x['DOB'].split('/')
-		day = date[1]
-	if day not in dict_of_day:
-		dict_of_days = 1
-	else:
-		dict_of_days += 1
-	srtd_days = sorted(dict_of_days, key = lambda d: dict_of_days[d], reverse = True)
+		date = x['DOB'].split('/')[1]
+		if date not in dict_of_days.keys():
+			dict_of_days[date] = 1
+		else:
+			dict_of_days[date] += 1
+	srtd_days = sorted(dict_of_days, key = dict_of_days.get, reverse = True)
 	return int(srtd_days[0])
 
 #5
@@ -102,7 +104,7 @@ def findAge(a):
 			age.append(current_year - int(year))
 		else:
 			age.append(current_year - int(year) + 1)
-	return round((sum(age) / len(age)), 0)
+	return int(round((sum(age) / len(age)), 0))
 		
 
 
