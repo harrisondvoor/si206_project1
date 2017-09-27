@@ -62,8 +62,8 @@ def classSizes(data):
 	lst3.append(('Junior', size_of_grade['Junior']))
 	lst3.append(('Sophomore', size_of_grade['Sophomore']))
 	lst3.append(('Freshman', size_of_grade['Freshman']))
-
 	return sorted(lst3, key = lambda z: z[1], reverse = True)
+
 
 
 
